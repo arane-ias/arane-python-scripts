@@ -15,7 +15,7 @@ class SendReport:
         return secrets
 
     def send(self):
-        secrets = self.get_secrets()
+        # secrets = self.get_secrets()
 
         response = self.ses_client.send_email(
             SourceArn='arn:aws:ses:us-east-1:926377094994:identity/dev.303net.net',

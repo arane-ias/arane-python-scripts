@@ -1,0 +1,30 @@
+{
+    "spotify": [
+        {
+            "utc_date": "2022-12-06",
+            "snowflake_imp": 4200496,
+            "lower_bound": -883734,
+            "previous_yr_snowflake_imp": 8997330,
+            "snowflake_YoY_drop": -53.31,
+            "previous_day_snowflake_imp": 4479504,
+            "snowflake_DoD_drop": -6.23,
+            "athena_imp": 0,
+            "athena_DoD_drop": 0,
+            "athena_YoY_drop": 0,
+            "lower_drop": 121.04
+        },
+        {
+            "utc_date": "2022-12-07",
+            "snowflake_imp": 3936743,
+            "lower_bound": -641853,
+            "previous_yr_snowflake_imp": 19134527,
+            "snowflake_YoY_drop": -79.43,
+            "previous_day_snowflake_imp": 4200496,
+            "snowflake_DoD_drop": -6.28,
+            "athena_imp": 0,
+            "athena_DoD_drop": 0,
+            "athena_YoY_drop": 0,
+            "lower_drop": 116.3
+        }
+    ]
+}
