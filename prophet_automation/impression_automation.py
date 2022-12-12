@@ -64,7 +64,7 @@ class Detection:
         It will compare the delta snowflake with prediction lower bound
         If snowflake impression less than lower bound its identified as anomaly
         """
-        anomaly_detected_partner_data = {}
+        partner_data = {}
         lower_bound = bulk['lower_bound'].values[0]
         sf_imp = delta_dict['snowflake_imp']
         logging.info(f'lower_bound {lower_bound}')
