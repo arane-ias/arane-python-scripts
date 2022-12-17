@@ -1,0 +1,4 @@
+boto3==1.17.105
+requests==2.25.1
+pandas==1.5.2
+wheel==0.38.4

@@ -79,7 +79,9 @@ class Detection:
              'previous_day_snowflake_imp': bulk['previous_day_snowflake_imp'].values[0],
              'snowflake_DoD_drop': bulk['snowflake_DoD_drop'].values[0],
              'athena_imp': delta_dict['athena_imp'],
+             'previous_day_athena_imp': bulk['previous_day_athena_imp'].values[0],
              'athena_DoD_drop': bulk['athena_DoD_drop'].values[0],
+             'previous_yr_athena_imp': bulk['previous_yr_athena_imp'].values[0],
              'athena_YoY_drop': bulk['athena_YoY_drop'].values[0],
              }
 

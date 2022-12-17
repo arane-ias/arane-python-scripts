@@ -8,7 +8,7 @@ class EmailReport:
 
     def get_status(self, value):
         status = ""
-        if value != 0:
+        if value != 0 or value != "NA":
             if value < 0:
                 status = "Drop     "
             else:
@@ -25,10 +25,8 @@ class EmailReport:
                 yoy_status = self.get_status(row['snowflake_YoY_drop'])
                 snowflake_row += "<td>" + row['utc_date'] + "</td>"
                 snowflake_row += "<td>" + partner + "</td>"
-                snowflake_row += "<td>" + dod_status + \
-                    str(row['snowflake_DoD_drop']) + "</td>"
-                snowflake_row += "<td>" + yoy_status + \
-                    str(row['snowflake_YoY_drop']) + "</td>"
+                snowflake_row += "<td>" + dod_status + str(row['snowflake_DoD_drop']) + "</td>"
+                snowflake_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "</td>"
                 snowflake_row += "</tr>"
 
         snowflake_row += "</tr>"
@@ -44,8 +42,8 @@ class EmailReport:
                 yoy_status = self.get_status(row['athena_YoY_drop'])
                 athena_row += "<td>" + row['utc_date'] + "</td>"
                 athena_row += "<td>" + partner + "</td>"
-                athena_row += "<td>" + str(row['athena_DoD_drop']) + "</td>"
-                athena_row += "<td>" + str(row['athena_YoY_drop']) + "</td>"
+                athena_row += "<td>" + dod_status + str(row['athena_DoD_drop']) + "</td>"
+                athena_row += "<td>" + yoy_status + str(row['athena_YoY_drop']) + "</td>"
                 athena_row += "</tr>"
 
         athena_row += "</tr>"
@@ -62,8 +60,8 @@ class EmailReport:
                     status = ""
                     if param in ["diff_athena_snowflake", "snowflake_DoD_drop", "snowflake_YoY_drop", "athena_DoD_drop", "athena_YoY_drop"]:
                         status = self.get_status(row[param])
-                    discrepancy_row += "<td>" + \
-                        status + str(row[param]) + "</td>"
+                    
+                    discrepancy_row += "<td>" + status + str(row[param]) + "</td>"
                 discrepancy_row += "</tr>"
         discrepancy_row += "</tr>"
         return discrepancy_row
@@ -118,11 +116,11 @@ impression_details = [{'spotify':
                        [
                            {
                                "utc_date": "2022-12-06",
-                               "athena_imp": 0,
+                               "athena_imp": "NA",
                                "snowflake_imp": 3698740759,
                                "diff_athena_snowflake": -100.0,
-                               "athena_DoD_drop": 0,
-                               "athena_YoY_drop": 0,
+                               "athena_DoD_drop": "NA",
+                               "athena_YoY_drop": "NA",
                                "snowflake_DoD_drop": -1.21,
                                "snowflake_YoY_drop": 18.29
                            }]
@@ -132,21 +130,11 @@ impression_details = [{'spotify':
                        [
                            {
                                "utc_date": "2022-12-06",
-                               "athena_imp": 0,
+                               "athena_imp": "NA",
                                "snowflake_imp": 3698740759,
                                "diff_athena_snowflake": -100.0,
-                               "athena_DoD_drop": 0,
-                               "athena_YoY_drop": 0,
-                               "snowflake_DoD_drop": -1.21,
-                               "snowflake_YoY_drop": 18.29
-                           },
-                           {
-                               "utc_date": "2022-12-06",
-                               "athena_imp": 0,
-                               "snowflake_imp": 3698740759,
-                               "diff_athena_snowflake": -100.0,
-                               "athena_DoD_drop": 0,
-                               "athena_YoY_drop": 0,
+                               "athena_DoD_drop": "NA",
+                               "athena_YoY_drop": "NA",
                                "snowflake_DoD_drop": -1.21,
                                "snowflake_YoY_drop": 18.29
                            }

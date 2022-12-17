@@ -38,6 +38,35 @@
             "snowflake_DoD_drop": -1.21,
             "snowflake_YoY_drop": 18.29
         }
+    ],
+    "spotify": [
+        {
+            "utc_date": "2022-12-01",
+            "snowflake_imp": 3154448608,
+            "lower_bound": 937812111,
+            "previous_yr_snowflake_imp": 2775917869,
+            "snowflake_YoY_drop": 13.64,
+            "previous_day_snowflake_imp": 3913536537,
+            "snowflake_DoD_drop": -19.4,
+            "athena_imp": 0,
+            "athena_DoD_drop": 0,
+            "athena_YoY_drop": 0,
+            "diff_athena_snowflake": -100.0,
+            "lower_drop": 70.27
+        },
+        {
+            "utc_date": "2022-12-06",
+            "snowflake_imp": 3698740759,
+            "lower_bound": 492476908,
+            "previous_yr_snowflake_imp": 3126743282,
+            "snowflake_YoY_drop": 18.29,
+            "previous_day_snowflake_imp": 3744021173,
+            "snowflake_DoD_drop": -1.21,
+            "athena_imp": 0,
+            "athena_DoD_drop": 0,
+            "athena_YoY_drop": 0,
+            "diff_athena_snowflake": -100.0,
+            "lower_drop": 86.69
+        }
     ]
 }
-

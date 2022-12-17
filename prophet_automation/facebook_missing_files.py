@@ -1,13 +1,15 @@
 import logging
 import os
-import sys
-from datetime import datetime, timedelta, timezone
+from dotenv import load_dotenv
+from datetime import datetime, timedelta
  
 import boto3
+
+load_dotenv()
  
-AWS_REGION_NAME = "us-east-1"
+AWS_REGION_NAME = os.getenv('AWS_REGION_NAME')
 ENV = "prod"
-DOWNLOADED_DONE_PATH = "partner_raw/facebook/done/downloaded/{type}/utcdate={date}/utchour={hour}/"
+DOWNLOADED_DONE_PATH = os.getenv('DOWNLOADED_DONE_PATH')
 FB_FILE_TYPES = [
     "an_init", "an_player", "fb_display", "fb_init", "fb_player", "ig_display", "ig_init", "ig_player"
 ]
@@ -24,6 +26,20 @@ def path_exists(client, file_path):
 
     return (exists, size)
 
+def create_missing_fb_dict(utc_date,dict):
+    my_result = [utc_date]
+
+    for key in dict:
+        res = ""
+        if dict[key]:
+            for hour in dict[key]:
+                res += hour + ","
+        else:
+            res = "All Ok"
+            
+        my_result.append(res)
+    
+    return my_result
  
 def main():
     utc_date = '2022-12-12'
@@ -39,22 +55,11 @@ def main():
     date_range = datetime.strptime(end_date_str, "%Y-%m-%d %H:%M:%S")
     date_range_start = date_range
     date_range_end = date_range + timedelta(days=1)
-
-    # date_range_start = datetime.strptime("2022-03-17 00:00:00", "%Y-%m-%d %H:%M:%S")
-    # date_range_end = datetime.strptime("2022-03-18 23:00:00", "%Y-%m-%d %H:%M:%S")
-    dateFormatString = '|{:^21}|'
-    formatString = '{:^11}|'
  
-    header = ""
-    header += dateFormatString.format('datetime UTC')
-    for fb_type in FB_FILE_TYPES:
-        header += formatString.format(fb_type)
-    print(header)
     date_current = date_range_start
  
     # print(path_s3)
     while date_current < date_range_end:
-        line_str = dateFormatString.format(date_current.strftime('%Y-%m-%d %H:%M:%S'))
         for fb_type in FB_FILE_TYPES:
             path_s3 = DOWNLOADED_DONE_PATH.format(
                 type=fb_type,
@@ -63,31 +68,13 @@ def main():
             )
             exists, size = path_exists(s3_client, path_s3)
             if exists:
-                if size > 0:
-                    line_str += formatString.format('OK')
-                else:
-                    line_str += formatString.format(f'OK-{size:,}')
+                pass
             else:
-                line_str += formatString.format('NO DATA')
                 hour = date_current.strftime("%H")
                 dict[fb_type].append(hour)
         date_current = date_current + timedelta(hours=1)
-        # print(line_str)
     
-    print(dict)
-
-    my_result = [utc_date]
-
-    for key in dict:
-        res = ""
-        if dict[key]:
-            for hour in dict[key]:
-                res += hour + ","
-        else:
-            res = "All Ok"
-            
-        my_result.append(res)
-
+    my_result = create_missing_fb_dict(utc_date,dict)
     print(my_result)
 
 if __name__ == "__main__":
