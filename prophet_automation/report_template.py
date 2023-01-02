@@ -116,6 +116,8 @@ class EmailReport:
         cols_count = 9
         for col in range(cols_count):
             html_row = "<tr>"
+            if col == 0:
+                html_row = "<tr style='color: red;'>"
             for row in range(no_of_missing_dates):
                 html_row = html_row + "<td>" + self.facebook_missing_data[row][col] + "</td>"
             html_row += "</tr>"
@@ -125,13 +127,12 @@ class EmailReport:
 
     # creating email template.
     def create_email_template(self):
-        html_body = "<!DOCTYPE html><head><style>table,th,td {border: 1px solid black;border-collapse: collapse;padding: 5px;}th {text-align: center;}</style></head><body>Hello Team,<br/><br/>Please find the attached metrics for Walled Garden partners -<br/><br/>"
-
-        powerbi_table = "<table><th colspan='3'>Power BI</th><tr><td>Date</td><td>Partner Name</td><td>YoY Drop</td></tr>"
-        snowflake_table = "<table><th colspan='4'>Snowflake</th><tr><td>Date</td><td>Partner Name</td><td>DoD Drop</td><td>YoY Drop</td></tr>"
-        athena_table = "<table><th colspan='3'>Athena</th><tr><td>Date</td><td>Partner Name</td><td>DoD Drop</td></tr>"
-        discrepancy_table = "<table><th colspan='8'>Discrepancies between Snowflake and partner_raw tables.</th><tr><td>PMI</td><td>Date</td><td>partner_raw</td><td>Snowflake</td><td>% dif between Snowflake and partner_raw</td><td>parter_raw DoD % change</td><td>snowflake DoD % change</td><td>snowflake YoY % change</td></tr>"
-        missing_files_table = "<table><th colspan='" + self.missing_data_length + "'>Facebook Missing Files/hours stats:</th>"
+        html_body = "<!DOCTYPE html><head><style>table,th,td {border: 1px solid black;border-collapse: collapse;padding: 5px;}th {text-align: center;} .snowflake {background: #66ccff}.powerbi {background: #CBC3E3}.athena {background: #ccffcc}.diff {background: #d9d9d9}.fb {background: #ffb3b3}</style></head><body>Hello Team,<br/><br/>Please find the attached metrics for Walled Garden partners -<br/><br/>"
+        powerbi_table = "<table><th colspan='3' class='powerbi'>Power BI</th><tr class='powerbi'><td>Date</td><td>Partner Name</td><td>YoY Drop</td></tr>"
+        snowflake_table = "<table><th colspan='4' class='snowflake'>Snowflake</th><tr class='snowflake'><td>Date</td><td>Partner Name</td><td>DoD Drop</td><td>YoY Drop</td></tr>"
+        athena_table = "<table><th colspan='3' class='athena'>Athena</th><tr class='athena'><td>Date</td><td>Partner Name</td><td>DoD Drop</td></tr>"
+        discrepancy_table = "<table><th colspan='8' class='diff'>Discrepancies between Snowflake and partner_raw tables.</th><tr class='diff'><td>PMI</td><td>Date</td><td>partner_raw</td><td>Snowflake</td><td>% dif between Snowflake and partner_raw</td><td>parter_raw DoD % change</td><td>snowflake DoD % change</td><td>snowflake YoY % change</td></tr>"
+        missing_files_table = "<table><th colspan='" + self.missing_data_length + "' class='fb'>Facebook Missing Files/hours stats:</th>"
 
         powerbi_rows = snowflake_rows = athena_rows = discrepancy_rows = ""
         table_ending_tag = "</table><br /> <br />"
