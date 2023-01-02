@@ -1,72 +1,101 @@
 {
-    "facebook": [
-        {
-            "utc_date": "2022-12-01",
-            "snowflake_imp": 3154448608,
-            "lower_bound": 937812111,
-            "previous_yr_snowflake_imp": 2775917869,
-            "snowflake_YoY_drop": 13.64,
-            "previous_day_snowflake_imp": 3913536537,
-            "snowflake_DoD_drop": -19.4,
-            "athena_imp": 0,
-            "athena_DoD_drop": 0,
-            "athena_YoY_drop": 0,
-            "diff_athena_snowflake": -100.0,
-            "lower_drop": 70.27
-        },
-        {
-            "utc_date": "2022-12-06",
-            "snowflake_imp": 3698740759,
-            "lower_bound": 492476908,
-            "previous_yr_snowflake_imp": 3126743282,
-            "snowflake_YoY_drop": 18.29,
-            "previous_day_snowflake_imp": 3744021173,
-            "snowflake_DoD_drop": -1.21,
-            "athena_imp": 0,
-            "athena_DoD_drop": 0,
-            "athena_YoY_drop": 0,
-            "diff_athena_snowflake": -100.0,
-            "lower_drop": 86.69
-        },
-        {
-            "utc_date": "2022-12-06",
-            "athena_imp": 0,
-            "snowflake_imp": 3698740759,
-            "diff_athena_snowflake": -100.0,
-            "athena_DoD_drop": 0,
-            "athena_YoY_drop": 0,
-            "snowflake_DoD_drop": -1.21,
-            "snowflake_YoY_drop": 18.29
-        }
-    ],
-    "spotify": [
-        {
-            "utc_date": "2022-12-01",
-            "snowflake_imp": 3154448608,
-            "lower_bound": 937812111,
-            "previous_yr_snowflake_imp": 2775917869,
-            "snowflake_YoY_drop": 13.64,
-            "previous_day_snowflake_imp": 3913536537,
-            "snowflake_DoD_drop": -19.4,
-            "athena_imp": 0,
-            "athena_DoD_drop": 0,
-            "athena_YoY_drop": 0,
-            "diff_athena_snowflake": -100.0,
-            "lower_drop": 70.27
-        },
-        {
-            "utc_date": "2022-12-06",
-            "snowflake_imp": 3698740759,
-            "lower_bound": 492476908,
-            "previous_yr_snowflake_imp": 3126743282,
-            "snowflake_YoY_drop": 18.29,
-            "previous_day_snowflake_imp": 3744021173,
-            "snowflake_DoD_drop": -1.21,
-            "athena_imp": 0,
-            "athena_DoD_drop": 0,
-            "athena_YoY_drop": 0,
-            "diff_athena_snowflake": -100.0,
-            "lower_drop": 86.69
-        }
-    ]
+    "Facebook": {
+        "utc_date": "2022-12-17",
+        "athena_imp": "NA",
+        "snowflake_imp": 4103340786,
+        "diff_athena_snowflake": "NA",
+        "athena_DoD_drop": "NA",
+        "snowflake_DoD_drop": "Rise 17.22%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Snapchat": {
+        "utc_date": "2022-12-17",
+        "athena_imp": 100838740,
+        "snowflake_imp": 99680199,
+        "diff_athena_snowflake": 1.162257912426519,
+        "athena_DoD_drop": "Rise 3.31%",
+        "snowflake_DoD_drop": "Rise 48.22%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Linkedin": {
+        "utc_date": "2022-12-17",
+        "athena_imp": "NA",
+        "snowflake_imp": 1708674,
+        "diff_athena_snowflake": "NA",
+        "athena_DoD_drop": "NA",
+        "snowflake_DoD_drop": "Rise 256.93%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Youtube - Parner Sold": {
+        "utc_date": "2022-12-17",
+        "athena_imp": "NA",
+        "snowflake_imp": 11352396,
+        "diff_athena_snowflake": "NA",
+        "athena_DoD_drop": "NA",
+        "snowflake_DoD_drop": "Drop 30.79%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Yahoo": {
+        "utc_date": "2022-12-17",
+        "athena_imp": 70494283,
+        "snowflake_imp": 63378375,
+        "diff_athena_snowflake": 11.22765927652768,
+        "athena_DoD_drop": "Rise 18.07%",
+        "snowflake_DoD_drop": "Drop 31.06%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Youtube - Google Ads": {
+        "utc_date": "2022-12-17",
+        "athena_imp": "NA",
+        "snowflake_imp": 484756245,
+        "diff_athena_snowflake": "NA",
+        "athena_DoD_drop": "NA",
+        "snowflake_DoD_drop": "Rise 10.42%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Youtube - DV 360": {
+        "utc_date": "2022-12-17",
+        "athena_imp": "NA",
+        "snowflake_imp": 1093551218,
+        "diff_athena_snowflake": "NA",
+        "athena_DoD_drop": "NA",
+        "snowflake_DoD_drop": "Rise 22.73%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Pinterest": {
+        "utc_date": "2022-12-17",
+        "athena_imp": "NA",
+        "snowflake_imp": 123715867,
+        "diff_athena_snowflake": "NA",
+        "athena_DoD_drop": "NA",
+        "snowflake_DoD_drop": "Rise 126.56%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Youtube - Reserve": {
+        "utc_date": "2022-12-17",
+        "athena_imp": "NA",
+        "snowflake_imp": 41219590,
+        "diff_athena_snowflake": "NA",
+        "athena_DoD_drop": "NA",
+        "snowflake_DoD_drop": "Drop 28.70%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Spotify": {
+        "utc_date": "2022-12-17",
+        "athena_imp": 7617807,
+        "snowflake_imp": 3255052,
+        "diff_athena_snowflake": 134.03027048415817,
+        "athena_DoD_drop": "Drop -11.27%",
+        "snowflake_DoD_drop": "NO CHANGE",
+        "snowflake_YoY_drop": "NO CHANGE"
+    },
+    "Twitter": {
+        "utc_date": "2022-12-17",
+        "athena_imp": "NA",
+        "snowflake_imp": 89595439,
+        "diff_athena_snowflake": "NA",
+        "athena_DoD_drop": "NA",
+        "snowflake_DoD_drop": "Drop 47.57%",
+        "snowflake_YoY_drop": "NO CHANGE"
+    }
 }

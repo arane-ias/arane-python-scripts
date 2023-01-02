@@ -25,11 +25,14 @@ class ExcelSheet:
     def update_excel_cols(self):
         row_key = 2
         for row in range(11):
-            partner = partner_name[row]
-            data = partner_data[partner]
+            partner = self.partner_name[row]
+            data = self.partner_data[partner]
             utc_date = datetime.strptime(data['utc_date'], '%Y-%m-%d')
             prev_utc_date = (utc_date - relativedelta(days=1)).strftime('%Y-%m-%d')
             prev_yr_utc_date = (utc_date - relativedelta(years=1)).strftime('%Y-%m-%d')
+
+            powerbi_utc_date = datetime.strptime(prev_utc_date,'%Y-%m-%d')
+            powerbi_prev_yr_utc_date = (powerbi_utc_date - relativedelta(years=1)).strftime('%Y-%m-%d')
             utc_date = utc_date.strftime('%Y-%m-%d')
 
             col_key = 'B'
@@ -49,9 +52,9 @@ class ExcelSheet:
 
             if row in [0,1,2,3,4,5,10]:
                 cell_location = chr(ord(col_key) + 8) + str(row_key)
-                self.sheet[cell_location] = "Imp Count For " + utc_date
+                self.sheet[cell_location] = "Imp Count For " + prev_utc_date
                 cell_location = chr(ord(col_key) + 9) + str(row_key)
-                self.sheet[cell_location] = "Imp Count For " + prev_yr_utc_date
+                self.sheet[cell_location] = "Imp Count For " + powerbi_prev_yr_utc_date
 
             row_key += 4
 
@@ -59,15 +62,15 @@ class ExcelSheet:
         yellow = "00FFFF00"
         row_key = 3
         for row in range(11):
-            partner = partner_name[row]
-            data = partner_data[partner]
+            partner = self.partner_name[row]
+            data = self.partner_data[partner]
             col_key = 'B'
             if row == 6 or row == 7 or row == 8 or row == 9:
                 tmp = 5
             else:
                 tmp = 11
             for cols in range(tmp):
-                field = attributes[cols]
+                field = self.attributes[cols]
                 cell_location = col_key + str(row_key)
 
                 # for dod and yoy drop
@@ -82,7 +85,7 @@ class ExcelSheet:
                             cell_value,status = self.get_status(data[field])
 
                         self.sheet[cell_location] = cell_value
-                        if status == 'drop':
+                        if status == 'drop' and data[field] < -20:
                             self.sheet[cell_location].fill = PatternFill(start_color=yellow, end_color=yellow, fill_type = "solid")
                 # for impression count 
                 else:
@@ -102,14 +105,12 @@ class ExcelSheet:
 
         self.workbook.save(filename='final_report.xlsx')
 
-
 partner_name = ['Pinterest','Linkedin','Spotify','Snapchat','Twitter','Facebook','Youtube - Google Ads','Youtube - DV 360','Youtube - Partner Sold','Youtube - Reserve','Yahoo']
 attributes = ['snowflake_imp','previous_day_snowflake_imp','previous_yr_snowflake_imp','snowflake_DoD_drop','snowflake_YoY_drop','athena_imp','previous_day_athena_imp','athena_DoD_drop','powerbi_imp','previous_yr_powerbi_imp','powerbi_YoY_drop']
 partner_data = {"Pinterest": 
         {
             "utc_date": "2022-12-01",
             "snowflake_imp": 3154448608,
-            "lower_bound": 937812111,
             "previous_yr_snowflake_imp": 2775917869,
             "snowflake_YoY_drop": 13.64,
             "previous_day_snowflake_imp": 3913536537,
@@ -117,10 +118,6 @@ partner_data = {"Pinterest":
             "athena_imp": 0,
             "previous_day_athena_imp": 3913536537,
             "athena_DoD_drop": 0,
-            "previous_yr_athena_imp": 2775917869,
-            "athena_YoY_drop": 0,
-            "diff_athena_snowflake": -100.0,
-            "lower_drop": 70.27,
             "powerbi_imp": 0,
             "previous_yr_powerbi_imp": 0,
             "powerbi_YoY_drop": 0
@@ -129,7 +126,6 @@ partner_data = {"Pinterest":
             {
                 "utc_date": "2022-12-01",
                 "snowflake_imp": 3154448608,
-                "lower_bound": 937812111,
                 "previous_yr_snowflake_imp": 2775917869,
                 "snowflake_YoY_drop": 13.64,
                 "previous_day_snowflake_imp": 3913536537,
@@ -137,10 +133,6 @@ partner_data = {"Pinterest":
                 "athena_imp": 0,
                 "previous_day_athena_imp": 3913536537,
                 "athena_DoD_drop": 0,
-                "previous_yr_athena_imp": 2775917869,
-                "athena_YoY_drop": 0,
-                "diff_athena_snowflake": -100.0,
-                "lower_drop": 70.27,
                 "powerbi_imp": 0,
                 "previous_yr_powerbi_imp": 0,
                 "powerbi_YoY_drop": 0
@@ -149,7 +141,6 @@ partner_data = {"Pinterest":
             {
                 "utc_date": "2022-12-01",
                 "snowflake_imp": 3154448608,
-                "lower_bound": 937812111,
                 "previous_yr_snowflake_imp": 2775917869,
                 "snowflake_YoY_drop": 13.64,
                 "previous_day_snowflake_imp": 3913536537,
@@ -157,10 +148,6 @@ partner_data = {"Pinterest":
                 "athena_imp": 0,
                 "previous_day_athena_imp": 3913536537,
                 "athena_DoD_drop": 0,
-                "previous_yr_athena_imp": 2775917869,
-                "athena_YoY_drop": 0,
-                "diff_athena_snowflake": -100.0,
-                "lower_drop": 70.27,
                 "powerbi_imp": 0,
                 "previous_yr_powerbi_imp": 0,
                 "powerbi_YoY_drop": 0
@@ -169,7 +156,6 @@ partner_data = {"Pinterest":
             {
                 "utc_date": "2022-12-01",
                 "snowflake_imp": 3154448608,
-                "lower_bound": 937812111,
                 "previous_yr_snowflake_imp": 2775917869,
                 "snowflake_YoY_drop": 13.64,
                 "previous_day_snowflake_imp": 3913536537,
@@ -177,10 +163,6 @@ partner_data = {"Pinterest":
                 "athena_imp": 0,
                 "previous_day_athena_imp": 3913536537,
                 "athena_DoD_drop": 0,
-                "previous_yr_athena_imp": 2775917869,
-                "athena_YoY_drop": 0,
-                "diff_athena_snowflake": -100.0,
-                "lower_drop": 70.27,
                 "powerbi_imp": 0,
                 "previous_yr_powerbi_imp": 0,
                 "powerbi_YoY_drop": 0
@@ -189,7 +171,6 @@ partner_data = {"Pinterest":
             {
                 "utc_date": "2022-12-01",
                 "snowflake_imp": 3154448608,
-                "lower_bound": 937812111,
                 "previous_yr_snowflake_imp": 2775917869,
                 "snowflake_YoY_drop": 13.64,
                 "previous_day_snowflake_imp": 3913536537,
@@ -197,10 +178,6 @@ partner_data = {"Pinterest":
                 "athena_imp": '',
                 "previous_day_athena_imp": '',
                 "athena_DoD_drop": '',
-                "previous_yr_athena_imp": '',
-                "athena_YoY_drop": '',
-                "diff_athena_snowflake": '',
-                "lower_drop": 70.27,
                 "powerbi_imp": 0,
                 "previous_yr_powerbi_imp": 0,
                 "powerbi_YoY_drop": 0
@@ -209,7 +186,6 @@ partner_data = {"Pinterest":
             {
                 "utc_date": "2022-11-30",
                 "snowflake_imp": 3154448608,
-                "lower_bound": 937812111,
                 "previous_yr_snowflake_imp": 2775917869,
                 "snowflake_YoY_drop": 13.64,
                 "previous_day_snowflake_imp": 3913536537,
@@ -217,10 +193,6 @@ partner_data = {"Pinterest":
                 "athena_imp": 0,
                 "previous_day_athena_imp": 3913536537,
                 "athena_DoD_drop": 0,
-                "previous_yr_athena_imp": 2775917869,
-                "athena_YoY_drop": 0,
-                "diff_athena_snowflake": -100.0,
-                "lower_drop": 70.27,
                 "powerbi_imp": 0,
                 "previous_yr_powerbi_imp": 0,
                 "powerbi_YoY_drop": 0
@@ -261,7 +233,6 @@ partner_data = {"Pinterest":
             {
                 "utc_date": "2022-12-01",
                 "snowflake_imp": 3154448608,
-                "lower_bound": 937812111,
                 "previous_yr_snowflake_imp": 2775917869,
                 "snowflake_YoY_drop": 13.64,
                 "previous_day_snowflake_imp": 3913536537,
@@ -269,10 +240,6 @@ partner_data = {"Pinterest":
                 "athena_imp": 0,
                 "previous_day_athena_imp": 3913536537,
                 "athena_DoD_drop": 0,
-                "previous_yr_athena_imp": 2775917869,
-                "athena_YoY_drop": 0,
-                "diff_athena_snowflake": -100.0,
-                "lower_drop": 70.27,
                 "powerbi_imp": 0,
                 "previous_yr_powerbi_imp": 0,
                 "powerbi_YoY_drop": 0
@@ -281,4 +248,3 @@ partner_data = {"Pinterest":
 
 report = ExcelSheet(partner_name,attributes,partner_data)
 report.create_excel_report()
-
