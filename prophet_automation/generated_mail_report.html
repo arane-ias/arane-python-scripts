@@ -13,13 +13,33 @@
         th {
             text-align: center;
         }
+
+        .snowflake {
+            background: #66ccff
+        }
+
+        .powerbi {
+            background: #CBC3E3
+        }
+
+        .athena {
+            background: #ccffcc
+        }
+
+        .diff {
+            background: #d9d9d9
+        }
+
+        .fb {
+            background: #ffb3b3
+        }
     </style>
 </head>
 
 <body>Hello Team,<br /><br />Please find the attached metrics for Walled Garden partners -<br /><br />
     <table>
-        <th colspan='3'>Power BI</th>
-        <tr>
+        <th colspan='3' class='powerbi'>Power BI</th>
+        <tr class='powerbi'>
             <td>Date</td>
             <td>Partner Name</td>
             <td>YoY Drop</td>
@@ -37,40 +57,43 @@
         <tr></tr>
     </table><br /> <br />
     <table>
-        <th colspan='4'>Snowflake</th>
-        <tr>
+        <th colspan='4' class='snowflake'>Snowflake</th>
+        <tr class='snowflake'>
             <td>Date</td>
             <td>Partner Name</td>
             <td>DoD Drop</td>
             <td>YoY Drop</td>
         </tr>
         <tr>
-            <td>2022-12-28</td>
-            <td>Spotify</td>
-            <td>Drop -34.51% </td>
-            <td>NA% </td>
-        </tr>
-        </tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
-        <tr>
-            <td>2022-12-28</td>
+            <td>2022-12-12</td>
             <td>Twitter</td>
-            <td>Drop -21.84% </td>
-            <td>Drop -74.53% </td>
+            <td>Rise 9.2% </td>
+            <td>Drop -30.69% </td>
         </tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr></tr>
+        <tr>
+            <td>2022-12-12</td>
+            <td>Youtube - Reserve</td>
+            <td>Rise 10.65% </td>
+            <td>Drop -21.62% </td>
+        </tr>
+        <tr>
+            <td>2022-12-12</td>
+            <td>Youtube - Partner Sold</td>
+            <td>Rise 3.46% </td>
+            <td>Drop -48.67% </td>
         </tr>
     </table><br /> <br />
     <table>
-        <th colspan='3'>Athena</th>
-        <tr>
+        <th colspan='3' class='athena'>Athena</th>
+        <tr class='athena'>
             <td>Date</td>
             <td>Partner Name</td>
             <td>DoD Drop</td>
@@ -88,8 +111,8 @@
         <tr></tr>
     </table><br /> <br />
     <table>
-        <th colspan='8'>Discrepancies between Snowflake and partner_raw tables.</th>
-        <tr>
+        <th colspan='8' class='diff'>Discrepancies between Snowflake and partner_raw tables.</th>
+        <tr class='diff'>
             <td>PMI</td>
             <td>Date</td>
             <td>partner_raw</td>
@@ -100,119 +123,119 @@
             <td>snowflake YoY % change</td>
         </tr>
         <tr>
-            <td>Spotify</td>
-            <td>2022-12-28</td>
-            <td>7617807</td>
-            <td>2548199</td>
-            <td>Rise 199% </td>
-            <td>Drop -11.27% </td>
-            <td>Drop -34.51% </td>
-            <td>NA% </td>
+            <td>Twitter</td>
+            <td>2022-12-12</td>
+            <td>NA</td>
+            <td>118332246</td>
+            <td>NA</td>
+            <td>NA</td>
+            <td>Rise 9.2% </td>
+            <td>Drop -30.69% </td>
         </tr>
         <tr>
             <td>Snapchat</td>
-            <td>2022-12-28</td>
+            <td>2022-12-12</td>
             <td>100838740</td>
-            <td>62334456</td>
-            <td>Rise 62% </td>
+            <td>74665992</td>
+            <td>Rise 35% </td>
             <td>Rise 3.31% </td>
-            <td>Drop -1.63% </td>
-            <td>Rise 28.18% </td>
-        </tr>
-        <tr>
-            <td>Yahoo</td>
-            <td>2022-12-28</td>
-            <td>70494283</td>
-            <td>59495774</td>
-            <td>Rise 18% </td>
-            <td>Rise 18.07% </td>
-            <td>Drop -7.57% </td>
-            <td>Drop -15.53% </td>
-        </tr>
-        <tr>
-            <td>Youtube - Google Ads</td>
-            <td>2022-12-28</td>
-            <td>NA</td>
-            <td>398694402</td>
-            <td>NA% </td>
-            <td>NA% </td>
-            <td>Drop -0.63% </td>
-            <td>Rise 17.89% </td>
-        </tr>
-        <tr>
-            <td>Youtube - DV 360</td>
-            <td>2022-12-28</td>
-            <td>NA</td>
-            <td>966367993</td>
-            <td>NA% </td>
-            <td>NA% </td>
-            <td>Rise 1.29% </td>
-            <td>Rise 13.67% </td>
-        </tr>
-        <tr>
-            <td>Pinterest</td>
-            <td>2022-12-28</td>
-            <td>7617807</td>
-            <td>95914418</td>
-            <td>Drop -92% </td>
-            <td>Drop -11.27% </td>
-            <td>Drop -0.19% </td>
-            <td>Rise 85.93% </td>
-        </tr>
-        <tr>
-            <td>Youtube - Reserve</td>
-            <td>2022-12-28</td>
-            <td>NA</td>
-            <td>23940957</td>
-            <td>NA% </td>
-            <td>NA% </td>
-            <td>Drop -11.28% </td>
-            <td>Drop -9.92% </td>
-        </tr>
-        <tr>
-            <td>Youtube - Parner Sold</td>
-            <td>2022-12-28</td>
-            <td>NA</td>
-            <td>7148204</td>
-            <td>NA% </td>
-            <td>NA% </td>
-            <td>Drop -9.52% </td>
-            <td>Drop -9.12% </td>
-        </tr>
-        <tr>
-            <td>Facebook</td>
-            <td>2022-12-27</td>
-            <td>7617807</td>
-            <td>3940180890</td>
-            <td>Drop -100% </td>
-            <td>Drop -11.27% </td>
-            <td>Rise 18.22% </td>
-            <td>NA% </td>
+            <td>Drop -8.37% </td>
+            <td>Rise 20.75% </td>
         </tr>
         <tr>
             <td>Linkedin</td>
-            <td>2022-12-28</td>
+            <td>2022-12-12</td>
             <td>7617807</td>
-            <td>1357923</td>
-            <td>Rise 461% </td>
+            <td>2401118</td>
+            <td>Rise 217% </td>
             <td>Drop -11.27% </td>
-            <td>Drop -4.46% </td>
-            <td>Rise 179.7% </td>
+            <td>Rise 43.11% </td>
+            <td>Rise 355.71% </td>
         </tr>
         <tr>
-            <td>Twitter</td>
-            <td>2022-12-28</td>
+            <td>Facebook</td>
+            <td>2022-12-12</td>
+            <td>7617807</td>
+            <td>3833216587</td>
+            <td>Drop -100% </td>
+            <td>Drop -11.27% </td>
+            <td>Drop -4.63% </td>
+            <td>Rise 9.12% </td>
+        </tr>
+        <tr>
+            <td>Youtube - DV 360</td>
+            <td>2022-12-12</td>
             <td>NA</td>
-            <td>48547496</td>
-            <td>NA% </td>
-            <td>NA% </td>
-            <td>Drop -21.84% </td>
-            <td>Drop -74.53% </td>
+            <td>1002711312</td>
+            <td>NA</td>
+            <td>NA</td>
+            <td>Drop -3.64% </td>
+            <td>Rise 17.28% </td>
+        </tr>
+        <tr>
+            <td>Spotify</td>
+            <td>2022-12-12</td>
+            <td>7617807</td>
+            <td>10414610</td>
+            <td>Drop -27% </td>
+            <td>Drop -11.27% </td>
+            <td>Rise 17.63% </td>
+            <td>NA</td>
+        </tr>
+        <tr>
+            <td>Yahoo</td>
+            <td>2022-12-12</td>
+            <td>70494283</td>
+            <td>82348553</td>
+            <td>Drop -14% </td>
+            <td>Rise 18.07% </td>
+            <td>Drop -15.48% </td>
+            <td>Drop -14.68% </td>
+        </tr>
+        <tr>
+            <td>Pinterest</td>
+            <td>2022-12-12</td>
+            <td>7617807</td>
+            <td>120610187</td>
+            <td>Drop -94% </td>
+            <td>Drop -11.27% </td>
+            <td>Drop -6.22% </td>
+            <td>Rise 50.37% </td>
+        </tr>
+        <tr>
+            <td>Youtube - Google Ads</td>
+            <td>2022-12-12</td>
+            <td>NA</td>
+            <td>399186008</td>
+            <td>NA</td>
+            <td>NA</td>
+            <td>Rise 1.04% </td>
+            <td>Drop -4.33% </td>
+        </tr>
+        <tr>
+            <td>Youtube - Reserve</td>
+            <td>2022-12-12</td>
+            <td>NA</td>
+            <td>40804774</td>
+            <td>NA</td>
+            <td>NA</td>
+            <td>Rise 10.65% </td>
+            <td>Drop -21.62% </td>
+        </tr>
+        <tr>
+            <td>Youtube - Partner Sold</td>
+            <td>2022-12-12</td>
+            <td>NA</td>
+            <td>12113166</td>
+            <td>NA</td>
+            <td>NA</td>
+            <td>Rise 3.46% </td>
+            <td>Drop -48.67% </td>
         </tr>
     </table><br /> <br />
     <table>
-        <th colspan='2'>Facebook Missing Files/hours stats:</th>
-        <tr>
+        <th colspan='2' class='fb'>Facebook Missing Files/hours stats:</th>
+        <tr style='color: red;'>
             <td>Data Files/Date</td>
             <td>2022-12-27</td>
         </tr>
