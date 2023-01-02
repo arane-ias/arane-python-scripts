@@ -2,16 +2,8 @@
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
@@ -31,16 +23,8 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
@@ -60,16 +44,8 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
@@ -89,16 +65,8 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
@@ -118,16 +86,8 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
@@ -147,16 +107,8 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
@@ -176,16 +128,8 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
@@ -206,16 +150,8 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
@@ -235,21 +171,13 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
   CASE
-  WHEN measurement_source_id = 15 THEN 'Youtube - Parner Sold'
+  WHEN measurement_source_id = 15 THEN 'Youtube - Partner Sold'
   ELSE 'UNKNOWN'
   END as measurement_source_id,
   hit_date,
@@ -264,16 +192,8 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
 from
 (
   ( select
@@ -293,16 +213,9 @@ union
 measurement_source_id,hit_date,total_imps,
 lead(total_imps,1) over (partition by measurement_source_id order by hit_date desc) as previous_imps,
 lead(total_imps,2) over (partition by measurement_source_id order by hit_date desc) as previous_yr_imps,
-CASE
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_imps)/ previous_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_imps)/ previous_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_imps)/ previous_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as DOD_percent,
-CASE
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) > 0 THEN 'Rise '|| to_varchar(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2)) ||'%'
-    WHEN round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) < 0 THEN 'Drop '|| to_varchar(ABS(round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2))) ||'%'
-    ELSE 'NO CHANGE'
-END as YOY from
+round((((total_imps - previous_imps)/ previous_imps)*100),2) as DOD_percent,
+round((((total_imps - previous_yr_imps)/ previous_yr_imps)*100),2) as YOY
+from
 (
   ( select
   CASE
