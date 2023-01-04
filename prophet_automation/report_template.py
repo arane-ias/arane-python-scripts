@@ -42,18 +42,46 @@ class EmailReport:
     
             if dod_status != "" or yoy_status != "":
                 if dod_status == "Drop " or yoy_status == "Drop ":
-                    if int(row['snowflake_DoD_drop']) < -20 or int(row['snowflake_YoY_drop']) < -20:
-                        snowflake_row += "<td>" + row['utc_date'] + "</td>"
-                        snowflake_row += "<td>" + partner + "</td>"
-                        if dod_status != "":
-                            snowflake_row += "<td>" + dod_status + str(row['snowflake_DoD_drop']) + "% " + "</td>"
-                        else:
-                            snowflake_row += "<td>" + dod_status + str(row['snowflake_DoD_drop']) + "</td>"
-                        
-                        if yoy_status != "":
-                            snowflake_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "% " + "</td>"
-                        else:
-                            snowflake_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "</td>"
+                    if dod_status == "Drop ":
+                        if int(row['snowflake_DoD_drop']) < -20:
+                            snowflake_row += "<td>" + row['utc_date'] + "</td>"
+                            snowflake_row += "<td>" + partner + "</td>"
+                            if dod_status != "":
+                                snowflake_row += "<td>" + dod_status + str(row['snowflake_DoD_drop']) + "% " + "</td>"
+                            else:
+                                snowflake_row += "<td>" + dod_status + str(row['snowflake_DoD_drop']) + "</td>"
+                            
+                            if yoy_status != "":
+                                snowflake_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "% " + "</td>"
+                            else:
+                                snowflake_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "</td>"
+                        elif yoy_status == "Drop ":
+                            if int(row['snowflake_YoY_drop']) < -20:
+                                snowflake_row += "<td>" + row['utc_date'] + "</td>"
+                                snowflake_row += "<td>" + partner + "</td>"
+                                if dod_status != "":
+                                    snowflake_row += "<td>" + dod_status + str(row['snowflake_DoD_drop']) + "% " + "</td>"
+                                else:
+                                    snowflake_row += "<td>" + dod_status + str(row['snowflake_DoD_drop']) + "</td>"
+                                
+                                if yoy_status != "":
+                                    snowflake_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "% " + "</td>"
+                                else:
+                                    snowflake_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "</td>"
+                    elif yoy_status == "Drop ":
+                        if int(row['snowflake_YoY_drop']) < -20:
+                            snowflake_row += "<td>" + row['utc_date'] + "</td>"
+                            snowflake_row += "<td>" + partner + "</td>"
+                            if dod_status != "":
+                                snowflake_row += "<td>" + dod_status + str(row['snowflake_DoD_drop']) + "% " + "</td>"
+                            else:
+                                snowflake_row += "<td>" + dod_status + str(row['snowflake_DoD_drop']) + "</td>"
+                            
+                            if yoy_status != "":
+                                snowflake_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "% " + "</td>"
+                            else:
+                                snowflake_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "</td>"
+                    
 
         snowflake_row += "</tr>"
         return snowflake_row
@@ -127,7 +155,7 @@ class EmailReport:
 
     # creating email template.
     def create_email_template(self):
-        html_body = "<!DOCTYPE html><head><style>table,th,td {border: 1px solid black;border-collapse: collapse;padding: 5px;}th {text-align: center;} .snowflake {background: #66ccff}.powerbi {background: #CBC3E3}.athena {background: #ccffcc}.diff {background: #d9d9d9}.fb {background: #ffb3b3}</style></head><body>Hello Team,<br/><br/>Please find the attached metrics for Walled Garden partners -<br/><br/>"
+        html_body = "<!DOCTYPE html><head><style>table,th,td {border: 1px solid black;border-collapse: collapse;padding: 5px; text-align: center;} .snowflake {background: #66ccff}.powerbi {background: #CBC3E3}.athena {background: #ccffcc}.diff {background: #d9d9d9}.fb {background: #ffb3b3}</style></head><body>Hello Team,<br/><br/>Please find the attached metrics for Walled Garden partners -<br/><br/>"
         powerbi_table = "<table><th colspan='3' class='powerbi'>Power BI</th><tr class='powerbi'><td>Date</td><td>Partner Name</td><td>YoY Drop</td></tr>"
         snowflake_table = "<table><th colspan='4' class='snowflake'>Snowflake</th><tr class='snowflake'><td>Date</td><td>Partner Name</td><td>DoD Drop</td><td>YoY Drop</td></tr>"
         athena_table = "<table><th colspan='3' class='athena'>Athena</th><tr class='athena'><td>Date</td><td>Partner Name</td><td>DoD Drop</td></tr>"
@@ -154,4 +182,3 @@ class EmailReport:
         f = open("generated_mail_report.html", "w")
         f.write(result)
         f.close()
-

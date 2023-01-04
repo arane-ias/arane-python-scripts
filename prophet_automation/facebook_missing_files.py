@@ -7,6 +7,7 @@ load_dotenv()
  
 class FacebookFiles:
     def __init__(self) -> None:
+        os.system("saml2aws login --skip-prompt --role=arn:aws:iam::420933651491:role/IAS-Engineering-Prod --force")
         self.AWS_REGION_NAME = os.getenv('AWS_REGION_NAME')
         self.ENV = "prod"
         self.DOWNLOADED_DONE_PATH = os.getenv('DOWNLOADED_DONE_PATH')
@@ -76,3 +77,6 @@ class FacebookFiles:
         facebook_missing_files = [header_titles,my_result]
         # print(my_result)
         return facebook_missing_files
+
+    def delete_aws_profile(self):
+        os.system("rm ~/.aws/credentials")

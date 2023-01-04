@@ -56,3 +56,11 @@ class PartnersData:
             result.append(partners_data)
 
         return result,excel_sheet_data
+
+# snowflake_file = "snowflake-results.csv"
+# athena_file = "athena-results.csv"
+# powerbi_file = "powerbi.csv"
+# obj = PartnersData(snowflake_file,athena_file,powerbi_file)
+# obj.get_data()
+
+
