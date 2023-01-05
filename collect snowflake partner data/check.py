@@ -61,7 +61,7 @@ class SnowflakeData:
         for name in partner_name:
             if name not in qry_sf_dates_df['MEASUREMENT_SOURCE_ID'].values:
                 date = ''
-                if name == 'Twitter':
+                if name == 'Facebook':
                     date = self.prev_utc_date
                 else:
                     date = self.utc_date
@@ -77,13 +77,12 @@ class SnowflakeData:
         
         qry_sf_dates_df.to_csv('../prophet_automation/snowflake-results.csv')
         
+# utc_date = ""
+# if len(sys.argv) == 2:
+#     utc_date = sys.argv[1]
+# else:
+#     utc_date = input("Enter UTC-date : ")       
 
-utc_date = ""
-if len(sys.argv) == 2:
-    utc_date = sys.argv[1]
-else:
-    utc_date = input("Enter UTC-date : ")       
-
-data = SnowflakeData(utc_date)
-result = data.get_snowflake_data()
-data.process_data(result)
+# data = SnowflakeData(utc_date)
+# result = data.get_snowflake_data()
+# data.process_data(result)

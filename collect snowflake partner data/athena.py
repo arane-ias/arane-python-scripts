@@ -7,9 +7,11 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from pathlib import Path
 import botocore
+import pandas as pd
 
 class AthenaQuery:
     def __init__(self) -> None:
+        # os.system("datalake-cre url")
         self.client = boto3.client('athena','us-east-1')
         self.s3 = boto3.resource('s3')
         self.session = boto3.Session(region_name='us-east-1')
@@ -56,9 +58,12 @@ class AthenaQuery:
             return filename
 
     def execute_query(self,utc_date):
+        self.utc_date = utc_date
+
         utc_date = datetime.strptime(utc_date,'%Y%m%d')
 
         prev_utc_date = (utc_date - relativedelta(days=1)).strftime('%Y%m%d')
+        self.prev_utc_date = prev_utc_date
 
         fb_prev_utc_date = (utc_date - relativedelta(days=2)).strftime('%Y%m%d')
 
@@ -75,27 +80,46 @@ class AthenaQuery:
 
         filename = self.execute(dates)
         self.get_csv(filename)
+        self.process_data()
 
     def get_csv(self,filename):
         bucket_name = 'iasqr-cre-784347022195-us-east-1'
 
         try:
-            self.s3.Bucket(bucket_name).download_file(filename, '../prophet_automation/athena-results.csv')
+            self.s3.Bucket(bucket_name).download_file(filename, 'athena-results.csv')
         except botocore.exceptions.ClientError as e:
             if e.response['Error']['Code'] == "404":
                 print("The object does not exist.")
             else:
                 raise
 
-    def set_aws_profile(self):
-        os.system("")
+    def process_data(self):
+        athena_df = pd.read_csv('athena-results.csv')
+        partner_name = ['Pinterest','Linkedin','Spotify','Snapchat','Facebook','Yahoo']
+        for name in partner_name:
+            if name not in athena_df['src'].values:
+                date = ''
+                if name == 'Facebook':
+                    date = self.prev_utc_date
+                else:
+                    date = self.utc_date
+
+                new_row = {'src': name,
+                            'utcdate': date,
+                            'imps_count': 'NA',
+                            'previous_day_count': 'NA',
+                            'DOD_percent': 'NA'
+                            }
+                athena_df = athena_df.append(new_row, ignore_index=True)
+        
+        athena_df.to_csv('../prophet_automation/athena-results.csv')
 
 
-utc_date = ""
-if len(sys.argv) == 2:
-    utc_date = sys.argv[1]
-else:
-    utc_date = input("Enter UTC-date : ")       
+# utc_date = ""
+# if len(sys.argv) == 2:
+#     utc_date = sys.argv[1]
+# else:
+#     utc_date = input("Enter UTC-date : ")       
 
-data = AthenaQuery()
-data.execute_query(utc_date)
+# data = AthenaQuery()
+# data.execute_query(utc_date)

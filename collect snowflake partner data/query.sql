@@ -35,7 +35,7 @@ from
   hit_date,
   sum(imps) as total_imps
   FROM cds_prod.analytics.AGG_PARTNER_MEASURED_VIEWABILITY
-  where measurement_source_id = 6 and hit_date in ($max_date_2,dateadd(year, -1, $max_date_2),dateadd(day, -1, $max_date_2))
+  where measurement_source_id = 6 and hit_date in ($max_date_1,dateadd(year, -1, $max_date_1),dateadd(day, -1, $max_date_1))
   group by hit_date,measurement_source_id
   order by hit_date desc
 ) )limit 1)
@@ -204,7 +204,7 @@ from
   hit_date,
   sum(imps) as total_imps
   FROM cds_prod.analytics.AGG_FACEBOOK_VIEWABILITY
-  where measurement_source_id = 4 and hit_date in ($max_date_1,dateadd(year, -1, $max_date_1),dateadd(day, -1, $max_date_1))
+  where measurement_source_id = 4 and hit_date in ($max_date_2,dateadd(year, -1, $max_date_2),dateadd(day, -1, $max_date_2))
   group by hit_date,measurement_source_id
   order by hit_date desc
 ) )limit 1)
