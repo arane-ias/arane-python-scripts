@@ -155,7 +155,7 @@ class EmailReport:
 
     # creating email template.
     def create_email_template(self):
-        html_body = "<!DOCTYPE html><head><style>table,th,td {border: 1px solid black;border-collapse: collapse;padding: 5px; text-align: center;} .snowflake {background: #66ccff}.powerbi {background: #CBC3E3}.athena {background: #ccffcc}.diff {background: #d9d9d9}.fb {background: #ffb3b3}</style></head><body>Hello Team,<br/><br/>Please find the attached metrics for Walled Garden partners -<br/><br/>"
+        html_body = "<!DOCTYPE html><head><style>th {font-size: 18px;}table,th,td {border: 1px solid black;border-collapse: collapse;padding: 5px; text-align: center;} .snowflake {background: #66ccff}.powerbi {background: #CBC3E3}.athena {background: #ccffcc}.diff {background: #d9d9d9}.fb {background: #ffb3b3}</style></head><body>Hello Team,<br/><br/>Please find the attached metrics for Walled Garden partners -<br/><br/>"
         powerbi_table = "<table><th colspan='3' class='powerbi'>Power BI</th><tr class='powerbi'><td>Date</td><td>Partner Name</td><td>YoY Drop</td></tr>"
         snowflake_table = "<table><th colspan='4' class='snowflake'>Snowflake</th><tr class='snowflake'><td>Date</td><td>Partner Name</td><td>DoD Drop</td><td>YoY Drop</td></tr>"
         athena_table = "<table><th colspan='3' class='athena'>Athena</th><tr class='athena'><td>Date</td><td>Partner Name</td><td>DoD Drop</td></tr>"

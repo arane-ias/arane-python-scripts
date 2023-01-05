@@ -36,7 +36,8 @@ class AthenaQuery:
                 'Database': 'partner_raw',
                 'Catalog': 'AwsDataCatalog'
             },
-            WorkGroup='cre'
+            WorkGroup='cre',
+            # ExeutionParameters=['2023-01-02','2023-01-01']
         )
         return execution
 
@@ -52,7 +53,7 @@ class AthenaQuery:
 
 
 data = AthenaQuery()
-data.call("select 'Snapchat' as src, utcdate , count(distinct impressionid) as imps_count from snapchat  where type = 'impression' and utcdate in ('2023-01-02', '2023-01-01') group by utcdate) order by utcdate desc limit 1")
+data.call("select src, utcdate, imps_count, lead(imps_count,1 ) over (partition by src order by utcdate desc ) as previous_day_count from (select 'Snapchat' as src, utcdate , count(distinct impressionid) as imps_count from snapchat  where type = 'impression' and utcdate in ('2023-01-02', '2023-01-01') group by utcdate)")
 
 # import boto3
 # import botocore
