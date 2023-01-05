@@ -10,9 +10,9 @@ class EmailReport:
         status = ""
         if value != 0 or value != "NA":
             if value < 0:
-                status = "Drop     "
+                status = "Drop "
             else:
-                status = "Rise     "
+                status = "Rise "
         return status
 
     # creating snowflake table rows dynamically.
