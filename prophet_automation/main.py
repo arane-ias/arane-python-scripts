@@ -3,16 +3,22 @@ from report_template import EmailReport
 from excel_sheet import ExcelSheet
 from facebook_missing_files import FacebookFiles
 from send_daily_report import SendMail
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 snowflake_file = "snowflake-results.csv"
 athena_file = "athena-results.csv"
 powerbi_file = "powerbi.csv"
+
 utc_date = input("Enter previous utc date for facebbok missing files : ")
+prev_utc_date = (datetime.strptime(utc_date,'%Y-%m-%d') - relativedelta(days=1)).strftime('%Y-%m-%d')
+utc_dates = [utc_date, prev_utc_date]
 
 data = PartnersData(snowflake_file,athena_file,powerbi_file)
 impression_details, excel_sheet_data = data.get_partners_data()
+
 facebook_data = FacebookFiles()
-facebook_missing_data = facebook_data.get_facebook_missing_files(utc_date)
+facebook_missing_data = facebook_data.get_fb_missing_files(utc_dates)
 facebook_data.delete_aws_profile()
 
 report = EmailReport(impression_details,facebook_missing_data)

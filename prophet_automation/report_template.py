@@ -3,6 +3,9 @@ class EmailReport:
         self.impression_details = impression_details
         self.facebook_missing_data = facebook_missing_data
         self.missing_data_length = str(len(facebook_missing_data))
+        self.powerbi_row_count = 0
+        self.snowflake_row_count = 0
+        self.athena_row_count = 0
 
     def get_status(self, value):
         status = ""
@@ -19,7 +22,7 @@ class EmailReport:
 
         for partner, row in self.impression_details[partner_index].items():
 
-            if partner in ['Snapchat','Spotify','Yahoo']:
+            if partner in ['Snapchat','Spotify','Yahoo','Pinterest','Linkedin','Twitter']:
                 yoy_status = self.get_status(row['powerbi_YoY_drop'])
 
                 if yoy_status != "":
@@ -27,7 +30,8 @@ class EmailReport:
                         if int(row['powerbi_YoY_drop']) < -20:
                             powerbi_row += "<td>" + row['utc_date'] + "</td>"
                             powerbi_row += "<td>" + partner + "</td>"
-                            powerbi_row += "<td>" + yoy_status + str(row['snowflake_YoY_drop']) + "% " + "</td>"
+                            powerbi_row += "<td>" + yoy_status + str(row['powerbi_YoY_drop']) + "% " + "</td>"
+                            self.powerbi_row_count += 1
         
         powerbi_row += "</tr>"
         return powerbi_row
@@ -42,6 +46,7 @@ class EmailReport:
     
             if dod_status != "" or yoy_status != "":
                 if dod_status == "Drop " or yoy_status == "Drop ":
+                    self.snowflake_row_count += 1
                     if dod_status == "Drop ":
                         if int(row['snowflake_DoD_drop']) < -20:
                             snowflake_row += "<td>" + row['utc_date'] + "</td>"
@@ -101,6 +106,7 @@ class EmailReport:
                             athena_row += "<td>" + row['utc_date'] + "</td>"
                             athena_row += "<td>" + partner + "</td>"
                             athena_row += "<td>" + dod_status + str(row['athena_DoD_drop']) + "% " + "</td>"
+                            self.athena_row_count += 1
             
         athena_row += "</tr>"
         return athena_row
@@ -175,10 +181,17 @@ class EmailReport:
 
         facebook_missing_files_table = self.create_fb_files_missing_table()
 
-        # combining all email html content & storing it into html file.
-        result = html_body + powerbi_table + powerbi_rows + table_ending_tag + snowflake_table + snowflake_rows + table_ending_tag + athena_table + \
-            athena_rows + table_ending_tag + discrepancy_table + \
-            discrepancy_rows + table_ending_tag + missing_files_table + facebook_missing_files_table + fb_table_end_tag + table_ending_tag + ending_tag
+        result = html_body
+
+        if self.powerbi_row_count != 0:
+            result = result + powerbi_table + powerbi_rows + table_ending_tag
+        if self.snowflake_row_count != 0:
+            result = result + snowflake_table + snowflake_rows + table_ending_tag
+        if self.athena_row_count != 0:
+            result = result + athena_table + athena_rows + table_ending_tag
+
+        result = result + discrepancy_table + discrepancy_rows + table_ending_tag + missing_files_table + facebook_missing_files_table + fb_table_end_tag + table_ending_tag + ending_tag
+
         f = open("generated_mail_report.html", "w")
         f.write(result)
         f.close()

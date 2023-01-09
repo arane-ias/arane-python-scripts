@@ -43,7 +43,7 @@ class FacebookFiles:
         
         return my_result
     
-    def get_facebook_missing_files(self,utc_date):
+    def get_facebook_missing_data(self,utc_date):
 
         dict = { 'an_init': [], 'an_player': [], 'fb_display': [],'fb_init': [],'fb_player': [],'ig_display': [],'ig_init': [],'ig_player': []}
 
@@ -72,11 +72,19 @@ class FacebookFiles:
                     dict[fb_type].append(hour)
             date_current = date_current + timedelta(hours=1)
         
+        fb_missing_data = self.create_missing_fb_dict(utc_date,dict)
+        # facebook_missing_files = [header_titles,fb_missing_data]
+        # print(fb_missing_data)
+        return fb_missing_data
+
+    def get_fb_missing_files(self,utc_dates):
         header_titles = ['Data Files/Date', 'an_init','an_player','fb_display','fb_init','fb_player','ig_display','ig_init','ig_player']
-        my_result = self.create_missing_fb_dict(utc_date,dict)
-        facebook_missing_files = [header_titles,my_result]
-        # print(my_result)
-        return facebook_missing_files
+        fb_missing_files = [header_titles]
+        for utc_date in utc_dates:
+            fb_missing_data = self.get_facebook_missing_data(utc_date)
+            fb_missing_files.append(fb_missing_data)
+
+        return fb_missing_files
 
     def delete_aws_profile(self):
         os.system("rm ~/.aws/credentials")
