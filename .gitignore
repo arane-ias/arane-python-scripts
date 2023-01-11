@@ -1,2 +1,2 @@
-collect snowflake partner data/venv310
+partners_data/venv310
 .env
