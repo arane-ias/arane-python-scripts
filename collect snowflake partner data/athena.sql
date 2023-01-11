@@ -3,72 +3,243 @@ round((CAST((imps_count -previous_day_count) as double ) / previous_day_count *1
 as DOD_percent 
 from 
 (
-    ( select src, utcdate, imps_count, lead(imps_count,1 ) over (partition by src order by utcdate desc ) as previous_day_count 
-        from 
+    (   
+        select 'Snapchat' as src, ? as utcdate, imps_count, previous_day_count
+        from
         (
-            select 'Snapchat' as src, utcdate , count(distinct impressionid) as imps_count 
-            from snapchat  where type = 'impression' and utcdate in (?,?) group by utcdate
-        ) 
-        order by utcdate desc limit 1
+            (
+                select count(distinct impressionid) as imps_count from snapchat
+                where 
+                (
+                    type = 'impression' and utcdate in (?) and sourceid = 10 and
+                    utchour not in ('00','01','02','03','04')
+                )
+                or
+                (
+                    type = 'impression' and  utcdate in (?) and sourceid = 10 and
+                    utchour in ('00','01','02','03','04')
+                )
+            )
+            CROSS JOIN
+            (
+                select count(distinct impressionid) as previous_day_count from snapchat
+                where 
+                (
+                    type = 'impression' and utcdate in (?) and sourceid = 10 and
+                    utchour not in ('00','01','02','03','04')
+                )
+                or
+                (
+                    type = 'impression' and utcdate in (?) and sourceid = 10 and
+                    utchour in ('00','01','02','03','04')
+                )
+            )
+        )
     ) 
     
     UNION ALL 
     
-    ( select src, utcdate, imps_count, lead(imps_count,1 ) over (partition by src order by utcdate desc ) as previous_day_count 
-        from 
+    ( 
+        select 'Pinterest' as src, ? as utcdate, imps_count, previous_day_count
+        from
         (
-            select 'Pinterest' as src, utcdate , count(distinct impressionid) as imps_count from pinterest  
-            where type = 'impression' and utcdate in (?,?) group by utcdate
-        ) 
-        order by utcdate desc limit 1
+            (
+                select count(distinct "original.impressionid") as imps_count from general_events_v1
+                where 
+                (
+                    "original.type"='impression' and utcdate in (?) and sourceid = 11 
+                    and utchour not in ('00','01','02','03','04')
+                )
+                or
+                ( 
+                    "original.type"='impression' and  utcdate in (?) and sourceid = 11 
+                    and utchour in ('00','01','02','03','04')
+                )  
+            )
+            CROSS JOIN
+            (
+                select count(distinct "original.impressionid") as previous_day_count from general_events_v1
+                where  
+                (
+                    "original.type"='impression' and utcdate in (?) and sourceid = 11 
+                    and utchour not in ('00','01','02','03','04')
+                )
+                or
+                (
+                    "original.type"='impression' and utcdate in (?) and sourceid = 11 
+                    and utchour in ('00','01','02','03','04')
+                )   
+            )
+        )
     ) 
     
     UNION ALL 
         
-    ( select src, utcdate, imps_count, lead(imps_count,1 ) over (partition by src order by utcdate desc ) as previous_day_count 
-        from 
+    ( 
+        select 'Linkedin' as src, ? as utcdate, imps_count, previous_day_count
+        from
         (
-            select 'Linkedin' as src, utcdate , count(distinct impressionid) as imps_count from linkedin  
-            where type = 'impression' and utcdate in (?,?) group by utcdate
-        ) 
-        order by utcdate desc limit 1
+            (
+                select count(distinct "original.impressionid") as imps_count from general_events_v1
+                where 
+                (
+                    "original.type"='impression' and utcdate in (?) and sourceid = 16
+                    and utchour not in ('00','01','02','03','04')
+                )
+                or
+                (
+                    "original.type"='impression' and  utcdate in (?) and sourceid = 16 
+                    and utchour in ('00','01','02','03','04')
+                ) 
+            )
+            CROSS JOIN
+            (
+                select count(distinct "original.impressionid") as previous_day_count from general_events_v1
+                where  
+                (
+                    "original.type"='impression' and utcdate in (?) and sourceid = 16 
+                    and utchour not in ('00','01','02','03','04')
+                )
+                or
+                or
+                (
+                    "original.type"='impression' and utcdate in (?) and sourceid = 16 
+                    and utchour in ('00','01','02','03','04')
+                )   
+            )
+        )
     ) 
     
     UNION ALL 
-    ( select src, utcdate, imps_count, lead(imps_count,1 ) over (partition by src order by utcdate desc ) as previous_day_count 
-        from 
+    ( 
+        select 'Spotify' as src, ? as utcdate, imps_count, previous_day_count
+        from
         (
-            select 'Spotify' as src, utcdate , count(distinct impressionid) as imps_count from spotify  where type = 'impression' 
-            and utcdate in (?,?) group by utcdate
-        ) 
-        order by utcdate desc limit 1
+            (
+                select count(distinct "original.impressionid") as imps_count from general_events_v2
+                where 
+                (
+                    "original.type"='impression' and utcdate in (?) and sourceid = 19
+                    and utchour not in('00','01','02','03','04')
+                )
+                or
+                (
+                    "original.type"='impression' and  utcdate in (?) and sourceid = 19
+                    and utchour in ('00','01','02','03','04')
+                )
+            )
+            CROSS JOIN
+            (
+                select count(distinct "original.impressionid") as previous_day_count from general_events_v2
+                where  
+                (
+                    "original.type"='impression' and utcdate in (?) and sourceid = 19
+                    and utchour not in ('00','01','02','03','04')
+                )
+                or
+                (
+                    "original.type"='impression' and utcdate in (?) and sourceid = 19
+                    and utchour in ('00','01','02','03','04')
+                )
+            )
+        )
     ) 
     
     UNION ALL 
-    ( select src, utcdate, imps_count, lead(imps_count,1 ) over (partition by src order by utcdate desc ) as previous_day_count 
-        from 
+    ( 
+        select 'Yahoo' as src, ? as utcdate, imps_count, previous_day_count
+        from
         (
-            select 'Yahoo' as src, utcdate , count(distinct impressionid) as imps_count from yahoo  where type = 'impression' 
-            and utcdate in (?,?) group by utcdate
-        ) 
-        order by utcdate desc limit 1
+            (
+                select count(distinct impressionid) as imps_count from yahoo
+                where 
+                (
+                    type = 'impression' and utcdate in (?) and sourceid = 5
+                    and utchour not in ('00','01','02','03','04')
+                )
+                or
+                (
+                    type = 'impression' and  utcdate in (?) and sourceid = 5
+                    and utchour in ('00','01','02','03','04')
+                )
+            )
+            CROSS JOIN
+            (
+                select count(distinct impressionid) as previous_day_count from yahoo
+                where 
+                (
+                    type = 'impression' and utcdate in (?) and sourceid = 5
+                    and utchour not in ('00','01','02','03','04')
+                )
+                or
+                (
+                    type = 'impression' and utcdate in (?) and sourceid = 5
+                    and utchour in ('00','01','02','03','04')
+                )
+            )
+        )
     )
 
     UNION ALL 
-    ( select 'Facebook' as src,utcdate,imps_count,previous_day_count
-        from 
+    ( 
+        select 'Facebook' as src, ? as utcdate, imps_count, previous_day_count
+        from
         (
-            select utcdate,imps_count,lead(imps_count,1 ) over (order by utcdate desc) as previous_day_count
-            from 
             (
-                select count(*) as imps_count,utcdate from "partner_raw"."facebook_parquet"
-                where utcdate in (?,?) and facebook_event_type in ('fb_init', 'ig_init', 'an_init') 
-                and not ( facebook_event_type in ('fb_init', 'ig_init') 
-                    and (page_type in (72, 73, 74) or (page_type in (72, 73, 74, 70, 46, 37) and ad_type in ('DISPLAY')))
+                select count(*) as imps_count from facebook_parquet
+                where  
+                (
+                    facebook_event_type in ('fb_init', 'ig_init', 'an_init') 
+                    and not ( 
+                            facebook_event_type in ('fb_init', 'ig_init') 
+                        and 
+                        (   
+                            page_type in (72, 73, 74) 
+                            or (page_type in (72, 73, 74, 70, 46, 37) and ad_type in ('DISPLAY'))
+                        )
+                    )
                 )
-                group by 2
-                order by 2 desc 
+                and
+                (
+                    (
+                        utcdate in (?)
+                        and utchour not in ('00','01','02','03','04')
+                    )
+                    or
+                    (
+                        utcdate in (?) 
+                        and utchour in ('00','01','02','03','04')
+                    )
+                )
             )
-        ) limit 1 
+            CROSS JOIN
+            (
+                select count(*) as previous_day_count from facebook_parquet
+                where  
+                (
+                    facebook_event_type in ('fb_init', 'ig_init', 'an_init') 
+                    and not ( 
+                            facebook_event_type in ('fb_init', 'ig_init') 
+                        and 
+                        (      
+                            page_type in (72, 73, 74) 
+                            or (page_type in (72, 73, 74, 70, 46, 37) and ad_type in ('DISPLAY'))
+                        )
+                    )
+                )
+                and 
+                (
+                    (
+                        utcdate in (?)
+                        and utchour not in ('00','01','02','03','04')
+                    )
+                    or
+                    (
+                        utcdate in (?) 
+                        and utchour in ('00','01','02','03','04')
+                    )
+                )
+            )
+        )
     )
 )
