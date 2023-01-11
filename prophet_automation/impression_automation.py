@@ -80,9 +80,7 @@ class Detection:
              'snowflake_DoD_drop': bulk['snowflake_DoD_drop'].values[0],
              'athena_imp': delta_dict['athena_imp'],
              'previous_day_athena_imp': bulk['previous_day_athena_imp'].values[0],
-             'athena_DoD_drop': bulk['athena_DoD_drop'].values[0],
-             'previous_yr_athena_imp': bulk['previous_yr_athena_imp'].values[0],
-             'athena_YoY_drop': bulk['athena_YoY_drop'].values[0],
+             'athena_DoD_drop': bulk['athena_DoD_drop'].values[0]
              }
 
         lower_drop = (
@@ -142,27 +140,11 @@ class Detection:
                 str_previous_yr = previous_year.strftime('%Y-%m-%d')
 
                 # Capture previous year imparession count and get the YoY drop percentage for Snowflake
-                previous_year_data = partner_bulk.loc[partner_bulk.utc_date ==
-                                                      str_previous_yr]
+                previous_year_data = partner_bulk.loc[partner_bulk.utc_date == str_previous_yr]
                 previous_year_sf = previous_year_data['snowflake_imp'].values[0]
-                year_drop = (
-                    (row['snowflake_imp'] - previous_year_sf)/previous_year_sf)*100
+                year_drop = ((row['snowflake_imp'] - previous_year_sf)/previous_year_sf)*100
                 partner_bulk_delta_date_record['previous_yr_snowflake_imp'] = previous_year_sf
-                partner_bulk_delta_date_record['snowflake_YoY_drop'] = round(
-                    year_drop, 2)
-
-                # Capture previous year imparession count and get the YoY drop percentage for Athena
-                previous_year_data = partner_bulk.loc[partner_bulk.utc_date ==
-                                                      str_previous_yr]
-                previous_year_at = previous_year_data['athena_imp'].values[0]
-                if previous_year_at == 0:
-                    year_drop = 0
-                else:
-                    year_drop = (
-                        (row['athena_imp'] - previous_year_at)/previous_year_at)*100
-                partner_bulk_delta_date_record['previous_yr_athena_imp'] = previous_year_at
-                partner_bulk_delta_date_record['athena_YoY_drop'] = round(
-                    year_drop, 2)
+                partner_bulk_delta_date_record['snowflake_YoY_drop'] = round(year_drop, 2)
 
                 # Calculate previous day
                 previous_day = current_date_formatted - relativedelta(days=1)
@@ -179,23 +161,16 @@ class Detection:
                     day_drop, 2)
 
                 # Capture previous day imparession count and get the DoD drop percentage for Athena
-                previous_day_data = partner_bulk.loc[partner_bulk.utc_date ==
-                                                     str_previous_day]
+                previous_day_data = partner_bulk.loc[partner_bulk.utc_date == str_previous_day]
                 previous_day_at = previous_day_data['athena_imp'].values[0]
-                if previous_day_at == 0:
-                    day_drop = 0
-                else:
-                    day_drop = (
-                        (row['athena_imp'] - previous_day_at)/previous_day_at)*100
+                day_drop = ((row['athena_imp'] - previous_day_at)/previous_day_at)*100
 
                 partner_bulk_delta_date_record['previous_day_athena_imp'] = previous_day_at
-                partner_bulk_delta_date_record['athena_DoD_drop'] = round(
-                    day_drop, 2)
+                partner_bulk_delta_date_record['athena_DoD_drop'] = round(day_drop, 2)
 
                 logging.info('Initializing Anomaly detection ')
 
-                detected_partners_date = self.detect(
-                    row, partner_bulk_delta_date_record)
+                detected_partners_date = self.detect(row, partner_bulk_delta_date_record)
 
                 if detected_partners_date:
 
@@ -203,12 +178,10 @@ class Detection:
 
                         existing_anomaly_details = anomaly_partner_data[self.partner_name]
                         if existing_anomaly_details:
-                            existing_anomaly_details.append(
-                                detected_partners_date)
+                            existing_anomaly_details.append(detected_partners_date)
                             anomaly_partner_data[self.partner_name] = existing_anomaly_details
                     else:
-                        anomaly_partner_data[self.partner_name] = [
-                            detected_partners_date]
+                        anomaly_partner_data[self.partner_name] = [detected_partners_date]
 
         logging.info(
             f'Anomaly detection process completed for {self.partner_name} partner ')
