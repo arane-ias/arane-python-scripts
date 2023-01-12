@@ -133,7 +133,6 @@ class Queries:
                                         and utchour not in ('00','01','02','03','04')
                                     )
                                     or
-                                    or
                                     (
                                         "original.type"='impression' and utcdate in (?) and sourceid = 16 
                                         and utchour in ('00','01','02','03','04')

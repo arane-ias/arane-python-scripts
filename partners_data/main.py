@@ -19,3 +19,5 @@ print("Athena Partner Data")
 utc_date = input("Enter UTC-date (yearmonthday) e.g. 20230102 : ")
 athena_data = AthenaQuery()
 athena_data.partner_queries(utc_date)
+
+print("Done")
